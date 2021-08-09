@@ -1,0 +1,10 @@
+body {
+  background-color: green;
+  display: grid;
+  height: 100vh;
+  margin: 0;
+  font-family: Helvetica;
+  text-align: center;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+}
