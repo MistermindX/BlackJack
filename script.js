@@ -122,39 +122,49 @@ async function mainGame() {
         downCard.style.opacity = 1
         HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
         gameOn = false
+        console.log('You bust!')
       }
     }
   })
   standButton.addEventListener('click', async function () {
     downCard.style.opacity = 1
     HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
-    gameOn = false
-    while (dealerSecret < 17) {
-      let newCard = await axios.get(
-        `https://deckofcardsapi.com/api/deck/${currentDeckID}/draw/?count=1`
-      )
-      let hitCard = newCard.data.cards
-      const hitItem = document.createElement('div')
-      hitItem.innerHTML = `<img class="card" src=${hitCard['0'].image}>`
-      Dealer.append(hitItem)
-      if (hitCard[0].value === 'ACE') {
-        dealerSecret = dealerSecret + 11
-        dealerAces += 1
-        if (dealerAces > 1) {
-          dealerTotal -= 10
+    if (gameOn) {
+      while (dealerSecret < 17) {
+        let newCard = await axios.get(
+          `https://deckofcardsapi.com/api/deck/${currentDeckID}/draw/?count=1`
+        )
+        let hitCard = newCard.data.cards
+        const hitItem = document.createElement('div')
+        hitItem.innerHTML = `<img class="card" src=${hitCard['0'].image}>`
+        Dealer.append(hitItem)
+        if (hitCard[0].value === 'ACE') {
+          dealerSecret = dealerSecret + 11
+          dealerAces += 1
+          if (dealerAces > 1) {
+            dealerTotal -= 10
+          }
+          HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+        } else if (
+          hitCard[0].value === 'KING' ||
+          hitCard[0].value === 'QUEEN' ||
+          hitCard[0].value === 'JACK'
+        ) {
+          dealerSecret = dealerSecret + 10
+          HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+        } else {
+          dealerSecret = dealerSecret + parseInt(hitCard[0].value)
+          HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
         }
-        HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
-      } else if (
-        hitCard[0].value === 'KING' ||
-        hitCard[0].value === 'QUEEN' ||
-        hitCard[0].value === 'JACK'
-      ) {
-        dealerSecret = dealerSecret + 10
-        HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
-      } else {
-        dealerSecret = dealerSecret + parseInt(hitCard[0].value)
-        HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
       }
+      if (myTotal > dealerSecret || dealerSecret > 21) {
+        console.log('You win!')
+      } else if (dealerSecret > myTotal && dealerSecret <= 21) {
+        console.log('You lose!')
+      } else {
+        console.log('Push!')
+      }
+      gameOn = false
     }
   })
 }

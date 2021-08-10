@@ -5,19 +5,23 @@ body {
   margin: 0;
   font-family: Helvetica;
   text-align: center;
-  grid-template-rows: 50px 1fr 1fr 1fr 300px;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  height: 100vh;
+  /* grid-template-rows: 100px 1fr 1fr 1fr 300px; */
+  /* grid-template-columns: repeat(); */
+  height: 100%;
 }
-
-.dealer {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+nav {
+  grid-row-start: 0;
+}
+/* .dealer {
+  grid-row: 1 /2;
+  display: inline-block;
 }
 .card {
   flex: 2;
+  display: inline-block;
 }
 
 .player {
-  display: flex;
-}
+  grid-row: 3/4;
+  display: inline-block;
+} */
