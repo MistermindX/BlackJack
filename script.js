@@ -4,6 +4,7 @@ const MyTotalScreen = document.querySelector(`.myTotal`)
 const HisTotalScreen = document.querySelector(`.hisTotal`)
 const hitButton = document.querySelector(`.hit`)
 const standButton = document.querySelector(`.stand`)
+const resetButton = document.querySelector(`.reset`)
 
 let myTotal = 0
 let dealerTotal = 0
@@ -76,7 +77,7 @@ async function mainGame() {
         dealerSecret = dealerTotal + 11
         dealerAces += 1
         if (dealerAces > 1) {
-          dealerTotal -= 10
+          dealerSecret -= 10
         }
       } else if (
         cardsArr[card].value === 'KING' ||
@@ -142,7 +143,7 @@ async function mainGame() {
           dealerSecret = dealerSecret + 11
           dealerAces += 1
           if (dealerAces > 1) {
-            dealerTotal -= 10
+            dealerSecret -= 10
           }
           HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
         } else if (
@@ -169,3 +170,21 @@ async function mainGame() {
   })
 }
 mainGame()
+
+resetButton.addEventListener(`click`, function () {
+  while (Player.firstChild) {
+    Player.removeChild(Player.lastChild)
+  }
+  while (Dealer.firstChild) {
+    Dealer.removeChild(Dealer.lastChild)
+  }
+  myTotal = 0
+  dealerTotal = 0
+  dealerSecret = 0
+  aces = 0
+  dealerAces = 0
+  gameOn = true
+  MyTotalScreen.innerHTML = `Total: ${myTotal}`
+  HisTotalScreen.innerHTML = `Total: ${dealerTotal}`
+  mainGame()
+})
