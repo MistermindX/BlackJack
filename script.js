@@ -3,10 +3,14 @@ const Dealer = document.querySelector(`.dealer`)
 const MyTotalScreen = document.querySelector(`.myTotal`)
 const HisTotalScreen = document.querySelector(`.hisTotal`)
 const hitButton = document.querySelector(`.hit`)
+const standButton = document.querySelector(`.stand`)
 
-myTotal = 0
-dealerTotal = 0
-dealerSecret = 0
+let myTotal = 0
+let dealerTotal = 0
+let dealerSecret = 0
+let aces = 0
+let dealerAces = 0
+let gameOn = true
 
 let newDeck = async function () {
   let response = await axios.get(
@@ -27,6 +31,10 @@ async function mainGame() {
     Player.append(myItem)
     if (cardsArr[card].value === 'ACE') {
       myTotal += 11
+      aces += 1
+      if (aces > 1) {
+        myTotal -= 10
+      }
       MyTotalScreen.innerHTML = `Total: ${myTotal}`
     } else if (
       cardsArr[card].value === 'KING' ||
@@ -60,11 +68,16 @@ async function mainGame() {
       }
     } else {
       const hisItem = document.createElement('div')
+      hisItem.classList.add('hidden')
       hisItem.style.opacity = 0
       hisItem.innerHTML = `<img class="card" src=${cardsArr[card].image}>`
       Dealer.append(hisItem)
       if (cardsArr[card].value === 'ACE') {
         dealerSecret = dealerTotal + 11
+        dealerAces += 1
+        if (dealerAces > 1) {
+          dealerTotal -= 10
+        }
       } else if (
         cardsArr[card].value === 'KING' ||
         cardsArr[card].value === 'QUEEN' ||
@@ -76,27 +89,72 @@ async function mainGame() {
       }
     }
   }
+  const downCard = document.querySelector(`.hidden`)
+
   hitButton.addEventListener(`click`, async function () {
     let newCard = await axios.get(
       `https://deckofcardsapi.com/api/deck/${currentDeckID}/draw/?count=1`
     )
     let hitCard = newCard.data.cards
-    const hitItem = document.createElement('div')
-    hitItem.innerHTML = `<img class="card" src=${hitCard['0'].image}>`
-    Player.append(hitItem)
-    if (hitCard['0'].value === 'ACE') {
-      myTotal += 11
-      MyTotalScreen.innerHTML = `Total: ${myTotal}`
-    } else if (
-      hitCard['0'].value === 'KING' ||
-      hitCard['0'].value === 'QUEEN' ||
-      hitCard['0'].value === 'JACK'
-    ) {
-      myTotal += 10
-      MyTotalScreen.innerHTML = `Total: ${myTotal}`
-    } else {
-      myTotal += parseInt(hitCard['0'].value)
-      MyTotalScreen.innerHTML = `Total: ${myTotal}`
+    if (gameOn) {
+      const hitItem = document.createElement('div')
+      hitItem.innerHTML = `<img class="card" src=${hitCard['0'].image}>`
+      Player.append(hitItem)
+      if (hitCard['0'].value === 'ACE') {
+        myTotal += 11
+        aces += 1
+        if (aces > 1) {
+          myTotal -= 10
+        }
+        MyTotalScreen.innerHTML = `Total: ${myTotal}`
+      } else if (
+        hitCard['0'].value === 'KING' ||
+        hitCard['0'].value === 'QUEEN' ||
+        hitCard['0'].value === 'JACK'
+      ) {
+        myTotal += 10
+        MyTotalScreen.innerHTML = `Total: ${myTotal}`
+      } else {
+        myTotal += parseInt(hitCard['0'].value)
+        MyTotalScreen.innerHTML = `Total: ${myTotal}`
+      }
+      if (myTotal > 21) {
+        downCard.style.opacity = 1
+        HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+        gameOn = false
+      }
+    }
+  })
+  standButton.addEventListener('click', async function () {
+    downCard.style.opacity = 1
+    HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+    gameOn = false
+    while (dealerSecret < 17) {
+      let newCard = await axios.get(
+        `https://deckofcardsapi.com/api/deck/${currentDeckID}/draw/?count=1`
+      )
+      let hitCard = newCard.data.cards
+      const hitItem = document.createElement('div')
+      hitItem.innerHTML = `<img class="card" src=${hitCard['0'].image}>`
+      Dealer.append(hitItem)
+      if (hitCard[0].value === 'ACE') {
+        dealerSecret = dealerSecret + 11
+        dealerAces += 1
+        if (dealerAces > 1) {
+          dealerTotal -= 10
+        }
+        HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+      } else if (
+        hitCard[0].value === 'KING' ||
+        hitCard[0].value === 'QUEEN' ||
+        hitCard[0].value === 'JACK'
+      ) {
+        dealerSecret = dealerSecret + 10
+        HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+      } else {
+        dealerSecret = dealerSecret + parseInt(hitCard[0].value)
+        HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+      }
     }
   })
 }
