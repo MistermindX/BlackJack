@@ -5,6 +5,7 @@ const HisTotalScreen = document.querySelector(`.hisTotal`)
 const hitButton = document.querySelector(`.hit`)
 const standButton = document.querySelector(`.stand`)
 const resetButton = document.querySelector(`.reset`)
+const result = document.querySelector(`.result`)
 
 let myTotal = 0
 let dealerTotal = 0
@@ -119,11 +120,15 @@ async function mainGame() {
         myTotal += parseInt(hitCard['0'].value)
         MyTotalScreen.innerHTML = `Total: ${myTotal}`
       }
+      if (aces >= 1 && myTotal > 21) {
+        myTotal -= 10
+      }
+
       if (myTotal > 21) {
         downCard.style.opacity = 1
         HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
         gameOn = false
-        console.log('You bust!')
+        result.innerHTML = 'You Bust!'
       }
     }
   })
@@ -159,11 +164,11 @@ async function mainGame() {
         }
       }
       if (myTotal > dealerSecret || dealerSecret > 21) {
-        console.log('You win!')
+        result.innerHTML = 'You Win!'
       } else if (dealerSecret > myTotal && dealerSecret <= 21) {
-        console.log('You lose!')
+        result.innerHTML = 'You Lose!'
       } else {
-        console.log('Push!')
+        result.innerHTML = 'Push!'
       }
       gameOn = false
     }
@@ -172,19 +177,5 @@ async function mainGame() {
 mainGame()
 
 resetButton.addEventListener(`click`, function () {
-  while (Player.firstChild) {
-    Player.removeChild(Player.lastChild)
-  }
-  while (Dealer.firstChild) {
-    Dealer.removeChild(Dealer.lastChild)
-  }
-  myTotal = 0
-  dealerTotal = 0
-  dealerSecret = 0
-  aces = 0
-  dealerAces = 0
-  gameOn = true
-  MyTotalScreen.innerHTML = `Total: ${myTotal}`
-  HisTotalScreen.innerHTML = `Total: ${dealerTotal}`
-  mainGame()
+  location.reload()
 })
