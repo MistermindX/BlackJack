@@ -6,6 +6,7 @@ const hitButton = document.querySelector(`.hit`)
 const standButton = document.querySelector(`.stand`)
 const resetButton = document.querySelector(`.reset`)
 const result = document.querySelector(`.result`)
+const rules = document.querySelector(`.rules`)
 
 let myTotal = 0
 let dealerTotal = 0
