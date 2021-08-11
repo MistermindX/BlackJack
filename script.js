@@ -6,7 +6,7 @@ const hitButton = document.querySelector(`.hit`)
 const standButton = document.querySelector(`.stand`)
 const resetButton = document.querySelector(`.reset`)
 const result = document.querySelector(`.result`)
-const rules = document.querySelector(`.rules`)
+const rulesButton = document.querySelector(`.rules`)
 
 let myTotal = 0
 let dealerTotal = 0
@@ -179,4 +179,8 @@ mainGame()
 
 resetButton.addEventListener(`click`, function () {
   location.reload()
+})
+
+rulesButton.addEventListener('click', function () {
+  window.location.href = '/rules.html'
 })
