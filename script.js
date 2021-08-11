@@ -12,7 +12,9 @@ let myTotal = 0
 let dealerTotal = 0
 let dealerSecret = 0
 let aces = 0
+let myAcesOne = 0
 let dealerAces = 0
+let dealerAcesOne = 0
 let gameOn = true
 
 let newDeck = async function () {
@@ -80,6 +82,7 @@ async function mainGame() {
         dealerAces += 1
         if (dealerAces > 1) {
           dealerSecret -= 10
+          dealerAcesOne += 1
         }
       } else if (
         cardsArr[card].value === 'KING' ||
@@ -108,6 +111,7 @@ async function mainGame() {
         aces += 1
         if (aces > 1) {
           myTotal -= 10
+          myAcesOne += 1
         }
         MyTotalScreen.innerHTML = `Total: ${myTotal}`
       } else if (
@@ -121,8 +125,10 @@ async function mainGame() {
         myTotal += parseInt(hitCard['0'].value)
         MyTotalScreen.innerHTML = `Total: ${myTotal}`
       }
-      if (aces >= 1 && myTotal > 21) {
+      if (aces >= 1 && myTotal > 21 && aces > myAcesOne) {
         myTotal -= 10
+        MyTotalScreen.innerHTML = `Total: ${myTotal}`
+        myAcesOne += 1
       }
 
       if (myTotal > 21) {
@@ -162,6 +168,15 @@ async function mainGame() {
         } else {
           dealerSecret = dealerSecret + parseInt(hitCard[0].value)
           HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+        }
+        if (
+          dealerAces >= 1 &&
+          dealerSecret > 21 &&
+          dealerAces > dealerAcesOne
+        ) {
+          dealerSecret -= 10
+          HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+          dealerAcesOne += 1
         }
       }
       if (myTotal > dealerSecret || dealerSecret > 21) {
