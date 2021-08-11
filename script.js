@@ -135,7 +135,7 @@ async function mainGame() {
         downCard.style.opacity = 1
         HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
         gameOn = false
-        result.innerHTML = 'You Bust!'
+        result.innerHTML = 'You Bust! Dealer Wins!'
       }
     }
   })
@@ -180,7 +180,11 @@ async function mainGame() {
         }
       }
       if (myTotal > dealerSecret || dealerSecret > 21) {
-        result.innerHTML = 'You Win!'
+        if (dealerSecret > 21) {
+          result.innerHTML = 'Dealer Busts! You Win!'
+        } else {
+          result.innerHTML = 'You Win!'
+        }
       } else if (dealerSecret > myTotal && dealerSecret <= 21) {
         result.innerHTML = 'You Lose!'
       } else {
