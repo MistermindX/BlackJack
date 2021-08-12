@@ -5,7 +5,7 @@ body {
   margin: 0;
   font-family: Helvetica;
   text-align: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 100px 1fr 1fr 1fr;
   height: 100%;
   font-family: 'Play', sans-serif;
 }
@@ -17,6 +17,7 @@ button {
   background-color: #999999;
   color: #ffffff;
   font-family: 'Play', sans-serif;
+  width: 100%;
 }
 
 button:hover {
