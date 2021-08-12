@@ -59,6 +59,7 @@ async function mainGame() {
       Dealer.append(hisItem)
       if (cardsArr[card].value === 'ACE') {
         dealerTotal += 11
+        dealerAces += 1
         HisTotalScreen.innerHTML = `Total: ${dealerTotal}`
       } else if (
         cardsArr[card].value === 'KING' ||
