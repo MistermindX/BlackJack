@@ -1,5 +1,5 @@
 body {
-  background-color: green;
+  background-image: url('/feltbackground.jpg');
   display: grid;
   height: 100vh;
   margin: 0;
