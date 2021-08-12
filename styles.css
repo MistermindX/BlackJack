@@ -7,6 +7,7 @@ body {
   text-align: center;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   height: 100%;
+  font-family: 'Play', sans-serif;
 }
 nav {
   display: block;
@@ -15,6 +16,7 @@ nav {
 button {
   background-color: #999999;
   color: #ffffff;
+  font-family: 'Play', sans-serif;
 }
 
 button:hover {

@@ -1,6 +1,7 @@
 body {
   background-image: url('/feltbackground.jpg');
   font-size: x-large;
+  font-family: 'Play', sans-serif;
 }
 
 h1,
@@ -12,6 +13,7 @@ p {
 button {
   background-color: #999999;
   color: #ffffff;
+  font-family: 'Play', sans-serif;
 }
 
 button:hover {
