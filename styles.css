@@ -5,23 +5,9 @@ body {
   margin: 0;
   font-family: Helvetica;
   text-align: center;
-  /* grid-template-rows: 100px 1fr 1fr 1fr 300px; */
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   height: 100%;
 }
 nav {
-  grid-row-start: 0;
+  display: block;
 }
-/* .dealer {
-  grid-row: 1 /2;
-  display: inline-block;
-}
-.card {
-  flex: 2;
-  display: inline-block;
-}
-
-.player {
-  grid-row: 3/4;
-  display: inline-block;
-} */

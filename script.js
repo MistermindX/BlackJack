@@ -19,7 +19,7 @@ let gameOn = true
 
 let newDeck = async function () {
   let response = await axios.get(
-    `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1`
+    `https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=6`
   )
   return response.data.deck_id
 }
