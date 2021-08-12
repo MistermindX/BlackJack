@@ -217,5 +217,5 @@ resetButton.addEventListener(`click`, function () {
 })
 
 rulesButton.addEventListener('click', function () {
-  window.location.href = '/rules.html'
+  window.location.href = 'rules.html'
 })

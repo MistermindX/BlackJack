@@ -1,5 +1,5 @@
 body {
-  background-image: url('/images/feltbackground.jpg');
+  background-image: url('../images/feltbackground.jpg');
   font-size: x-large;
   font-family: 'Play', sans-serif;
 }
