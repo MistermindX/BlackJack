@@ -21,7 +21,7 @@ This is a Blackjack game designed with Javascript. It is deployed on Surge.
 - HTML
 - CSS
 - Javascript
-- -Surge
+- Surge
 
 ---
 
