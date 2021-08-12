@@ -96,6 +96,22 @@ async function mainGame() {
     }
   }
   const downCard = document.querySelector(`.hidden`)
+  if (myTotal === 21 && dealerSecret != 21) {
+    HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+    downCard.style.opacity = 1
+    result.innerHTML = 'Blackjack! You Win!'
+    gameOn = false
+  } else if (dealerSecret === 21 && myTotal != 21) {
+    HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+    downCard.style.opacity = 1
+    result.innerHTML = 'Dealer Blackjack! You Lose!'
+    gameOn = false
+  } else if (myTotal === 21 && dealerSecret === 21) {
+    HisTotalScreen.innerHTML = `Total: ${dealerSecret}`
+    downCard.style.opacity = 1
+    result.innerHTML = 'Both Players Blackjack! Push!'
+    gameOn = false
+  }
 
   hitButton.addEventListener(`click`, async function () {
     let newCard = await axios.get(
