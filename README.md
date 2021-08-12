@@ -1,4 +1,5 @@
 # BlackJack
+
 Blackjack Javascript Game
 
 ## Date: 8/8/2021
@@ -11,7 +12,7 @@ Blackjack Javascript Game
 
 **_Description_**
 
-This is a Blackjack game designed with Javascript. 
+This is a Blackjack game designed with Javascript. It is deployed on Surge.
 
 ---
 
@@ -20,36 +21,38 @@ This is a Blackjack game designed with Javascript.
 - HTML
 - CSS
 - Javascript
+- -Surge
 
 ---
 
 **_Getting Started_**
 
-Click on New Game to start a new game of Blackjack on the rules screen to begin. 
+Game start on load. Click rules to see the rules of the game.
 A Trello was used to keep track of development progress and can be viewed [here](https://trello.com/b/N5eI33rH/blackjack-game).
 
 ---
 
 **_Screenshots_**
 
-### NaN
+### Game with normal Wincon
 
+![Normal Wincon](images/desktopWin.png)
 
-### NaN
+### Game with Blackjack Outcome
 
+![Blackjack Wincon](images/blackjackWincon.png)
 
-### NaN
+### Game on Mobile
 
+![Game on Mobile](images/mobileGame.png)
 
 **_Future Updates_**
 
-- [ ] Future Update 1
-- [ ] Future Update 2
-- [x] Completed Update
-- [x] ~~Strikethrough~~ Items Also
+- [ ] Betting
+- [ ] Reset without reload
 
 ---
 
 **_Credits_**
 
-- None yet
+- [Deck of Cards API](https://deckofcardsapi.com/)
